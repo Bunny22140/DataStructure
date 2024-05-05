@@ -1,0 +1,786 @@
+#1
+Num1 = int(input("Enter a number Num1: "))
+Num2 = int(input("Enter a number Num2: "))
+print("Before swaping Num1={} and Num2={}".format(Num1,Num2))
+temp = Num1
+Num1 = Num2
+Num2 = temp
+print("After swaping Num1={} and Num2={}".format(Num1,Num2))
+
+
+
+
+
+
+#2
+def array_sum(arr):
+    total = 0
+    for num in arr:
+        total += num
+    return total
+
+arr = []
+
+size = int(input("Enter the size of the array: "))
+
+print("Enter the elements of the array:")
+for i in range(size):
+    element = float(input())
+    arr.append(element)
+
+sum_of_array = array_sum(arr)
+
+print("Sum of elements in the array:", sum_of_array)
+
+
+
+
+
+
+
+#3
+# Function to add two matrices
+def add_matrices(matrix1, matrix2):
+    rows = len(matrix1)
+    cols = len(matrix1[0])
+    
+    # Initialize a result matrix with zeros
+    result = [[0 for _ in range(cols)] for _ in range(rows)]
+    
+    # Perform element-wise addition
+    for i in range(rows):
+        for j in range(cols):
+            result[i][j] = matrix1[i][j] + matrix2[i][j]
+    
+    return result
+
+# Taking input for first matrix
+rows = int(input("Enter the number of rows for matrix: "))
+cols = int(input("Enter the number of columns for matrix: "))
+
+print("Enter the elements of the first matrix:")
+matrix1 = [[int(input()) for _ in range(cols)] for _ in range(rows)]
+
+# Taking input for second matrix
+print("Enter the elements of the second matrix:")
+matrix2 = [[int(input()) for _ in range(cols)] for _ in range(rows)]
+
+# Adding matrices
+result_matrix = add_matrices(matrix1, matrix2)
+
+# Displaying the result
+print("Resultant Matrix after Addition:")
+for row in result_matrix:
+    print(row)
+
+
+
+
+
+
+#4
+def multiply_matrices(matrix1, matrix2):
+    rows1 = len(matrix1)
+    cols1 = len(matrix1[0])
+    rows2 = len(matrix2)
+    cols2 = len(matrix2[0])
+
+    if cols1 != rows2:
+        print("Matrices cannot be multiplied.")
+        return None
+
+    result = [[0 for _ in range(cols2)] for _ in range(rows1)]
+
+    for i in range(rows1):
+        for j in range(cols2):
+            for k in range(cols1):
+                result[i][j] += matrix1[i][k] * matrix2[k][j]
+
+    return result
+
+rows1 = int(input("Enter the number of rows for the first matrix: "))
+cols1 = int(input("Enter the number of columns for the first matrix: "))
+
+print("Enter the elements of the first matrix:")
+matrix1 = [[int(input()) for _ in range(cols1)] for _ in range(rows1)]
+
+rows2 = int(input("Enter the number of rows for the second matrix: "))
+cols2 = int(input("Enter the number of columns for the second matrix: "))
+
+print("Enter the elements of the second matrix:")
+matrix2 = [[int(input()) for _ in range(cols2)] for _ in range(rows2)]
+
+result_matrix = multiply_matrices(matrix1, matrix2)
+
+if result_matrix:
+    print("Resultant Matrix after Multiplication:")
+    for row in result_matrix:
+        print(row)
+
+
+
+
+
+
+
+
+#6
+def linearSearch(array,n,x):
+    for i in range (0,n):
+        if (array[i] ==x):
+            return i
+    return -1
+array = [2,4,0,1,9]
+x = 1
+n = len(array)
+result = linearSearch(array,n,x)
+if (result == -1):
+    print("Element not found")
+else:
+    print("Element found at index: ",result)
+
+
+
+
+
+
+
+
+#7
+def binarySearch(array,x,low,high):
+    while low<=high:
+        mid = low +(high-low)//2
+        if (array[mid]==x):
+            return mid
+        elif array[mid] <x:
+            low = mid+1
+        else:
+            high = mid-1
+    return -1
+
+array = [3,4,5,6,7,8,9]
+x=5
+
+result= binarySearch(array,x,0,len(array)-1)
+
+if result != -1:
+    print("Element is present at index " +str(result))
+else:
+    print("Not found")
+
+
+
+
+
+
+
+#8
+def sort(nums):
+    for i in range(len(nums)):
+        for j in range (0,len(nums)-i-1):
+            if nums[j] > nums[j+1]:
+                temp = nums[j]
+                nums[j] = nums[j+1]
+                nums[j+1] = temp
+nums= [5,2,1,7,9,4]
+sort(nums)
+print(nums)
+
+
+
+
+
+#9
+def insertionsort(array):
+    for step in range(1,len(array)):
+        key = array[step]
+        j = step-1
+        while j>=0 and key< array[j]:
+            array[j+1] = array[j]
+            j =j-1
+        array [j+1]= key
+
+data= [4,2,7,5,3,6]
+insertionsort(data)
+print("Sorted Array in Ascending order: ")
+print(data)
+
+
+
+
+
+
+
+#10
+def selectionsort(array,size):
+    for step in range(size):
+        min_idx = step
+        for i in range(step+1, size):
+            if array[i]< array[min_idx]:
+                min_idx = i
+        (array[step],array[min_idx]) = (array[min_idx],array[step])
+
+data = [5,2,4,-2,3,4]
+size = len(data)
+selectionsort(data,size)
+print("Sorted Array in Ascending order: ")
+print(data)
+
+
+
+
+
+
+#11
+def partition(array, low, high):
+    pivot = array[high]
+    i = low - 1
+
+    for j in range(low, high):
+        if array[j] <= pivot:
+            i = i + 1
+            array[i], array[j] = array[j], array[i]
+
+    array[i + 1], array[high] = array[high], array[i + 1]
+    return i + 1
+
+def quicksort(array, low, high):
+    if low < high:
+        pi = partition(array, low, high)
+        quicksort(array, low, pi - 1)
+        quicksort(array, pi + 1, high)
+
+data = [23, 5, 6, 34, 27, 7]
+print("Unsorted array:")
+print(data)
+
+size = len(data)
+quicksort(data, 0, size - 1)
+print("Sorted Array in Ascending Order:")
+print(data)
+
+
+
+
+
+#12
+def mergesort(array):
+    if len(array)>1:
+        
+        r=len(array)//2
+        l=array[:r]
+        m=array[r:]
+        
+        mergesort(l)
+        mergesort(m)
+        
+        i=j=k=0
+        
+        while i<len(l) and j<len(m):
+            if l[i]<m[j]:
+                array[k]=l[i]
+                i += 1
+            else:
+                array[k]=m[j]
+                j += 1
+                k+= 1
+                
+                while i <len(l):
+                    array[k]=l[i]
+                    i += 1
+                    k += 1
+                      
+                while j < len(m):
+                    array[k]=m[j]
+                    j += 1
+                    k += 1 
+def printList(array):
+    for i in range(len(array)):
+        print(array[i],end=" ")
+    print()   
+         
+if __name__ =='__main__':
+    array=[7,27,4,56,3,34]   
+    
+    mergesort(array)
+    
+    print("Sorted array is: ")
+    printList(array)
+
+
+
+
+
+
+#13
+#create a singular linked list
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__ (self):
+        self.head = None
+    
+    def printList(self):
+        temp = self.head
+        while (temp):
+            print(temp.data)
+            temp = temp.next
+
+linked_list = LinkedList()
+
+n1 = Node(10)
+linked_list.head = n1
+
+n2 = Node(20)
+n1.next = n2
+
+n3 = Node(30)
+n2.next = n3
+
+linked_list.printList()
+
+
+
+
+
+
+
+#14
+#create a singular linked list, create a node at beginning
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__ (self):
+        self.head = None    
+
+#new part for adding at beginning
+    def insertAtBeginning (self,new_data):
+        new_node = Node(new_data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def printList(self):
+        temp = self.head
+        while (temp):
+            print(temp.data)
+            temp = temp.next
+
+linked_list = LinkedList()
+
+n1 = Node(10)
+linked_list.head = n1
+
+n2 = Node(20)
+n1.next = n2
+
+n3 = Node(30)
+n2.next = n3
+
+linked_list.insertAtBeginning(0)
+linked_list.printList()
+
+
+
+
+
+
+#15
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+#insert after a node means middle
+    def insertAfter(self, prev_node, new_data):
+        if prev_node is None:
+            print("The given previous node must in LinkedList.")
+            return
+        new_node = Node (new_data)
+        new_node.next = prev_node.next
+        prev_node.next = new_node
+
+    def printList (self):
+        temp = self.head
+        while (temp):
+            print(temp.data)
+            temp = temp.next
+linked_list = LinkedList()
+
+n1 = Node(10)
+linked_list.head = n1
+
+n2 = Node(20)
+n1.next = n2
+
+n3 = Node(30)
+n2.next = n3
+
+linked_list.insertAfter(linked_list.head.next, 5)
+linked_list.printList()
+
+
+
+
+
+#16
+class Node:
+    def __init__(self,data):
+        self.data =data
+        self.next = None
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+#insert at end
+    def insertAtEnd(self, new_data):
+        new_node = Node (new_data)
+        if self.head is None:
+            self.head = new_node
+            return
+        last = self.head
+        while (last.next):
+            last = last.next
+        last.next = new_node
+
+    def printList (self):
+        temp = self.head
+        while (temp):
+            print(temp.data)
+            temp = temp.next
+linked_list = LinkedList()
+
+n1 = Node(10)
+linked_list.head = n1
+
+n2 = Node(20)
+n1.next = n2
+
+n3 = Node(30)
+n2.next = n3
+
+linked_list.insertAtEnd(40)
+linked_list.printList()
+
+
+
+
+
+
+
+
+
+#17
+#delete a node at beginning
+class Node:
+    def __init__(self , data) :
+        self.data=data
+        self.next=None
+
+class LinkedList:
+    def __init__(self) :
+        self.head= None
+
+    def deletion_at_beginning(self):
+        print()
+        a=self.head
+        self.head = a.next
+        a.next = Node
+    def printList(self):
+        temp=self.head
+        while(temp):
+            print(temp.data)
+            temp=temp.next
+        return        
+linked_list=LinkedList()
+
+n0=Node(10)
+linked_list.head=n0
+n1=Node(20)
+n0.next=n1
+n2=Node(30)
+n1.next=n2
+linked_list.deletion_at_beginning()
+linked_list.printList()
+
+
+
+
+
+#18
+#delete a node at middle
+class Node:
+    def __init__(self , data) :
+        self.data=data
+        self.next=None
+
+class LinkedList:
+    def __init__(self) :
+        self.head= None
+
+    def delete_at_middle(self,position):
+        prev = self.head
+        a = self.head.next
+        for i in range(0,position-1):
+            a = a.next
+            prev = prev.next
+        prev.next = a.next
+        a.next = None
+
+    def printList(self):
+        temp=self.head
+        while(temp):
+            print(temp.data)
+            temp=temp.next
+        return        
+linked_list=LinkedList()
+
+n0=Node(10)
+linked_list.head=n0
+n1=Node(20)
+n0.next=n1
+n2=Node(30)
+n1.next=n2
+linked_list.delete_at_middle(2)
+linked_list.printList()
+
+
+
+
+
+
+#19
+#delete a node at end
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def deletion_at_end(self):
+        print()
+        prev = self.head
+        a = self.head.next
+        while a.next is not None:
+            a = a.next
+            prev = prev.next
+        prev.next = None
+    def printList(self):
+        temp = self.head
+        while(temp):
+            print(temp.data)
+            temp = temp.next
+
+llist = LinkedList()
+n1 = Node(1)
+llist.head = n1
+n2 = Node(2)
+n1.next = n2
+n3 = Node(3)
+n2.next = n3
+n4 = Node(4)
+n3.next = n4
+n5 = Node(5)
+n4.next = n5
+print("Before Deleting: ")
+llist.printList()
+llist.deletion_at_end()
+print("After Deleting: ")
+llist.printList()
+
+
+
+
+
+
+#20
+class Node:
+    def __init__(self , data) :
+        self.data=data
+        self.next=None
+
+class LinkedList:
+    def __init__(self) :
+        self.head= None
+
+    def printList(self):
+        temp=self.head
+        while(temp):
+            print(temp.data)
+            temp=temp.next
+            return
+        
+    def search(self,key):
+        current = self.head
+        while current is not None:
+            if current.data == key:
+                return True
+            current = current.next
+        return False
+            
+            
+
+linked_list=LinkedList()
+
+n1=Node(10)
+linked_list.head=n1
+n2=Node(20)
+n1.next=n2
+n3=Node(30)
+n2.next=n3
+
+linked_list.printList()
+
+item = 10
+if linked_list.search(item):
+    print(str(item) + " found")
+else:
+    print(str(item)+"not found")
+
+
+
+
+#21
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.top = None
+#checks if stack is empty
+    def isempty(self):
+        if self.top == None:
+            return True
+        else:
+            return False
+
+#1) push
+    def push(self,data):
+        if self.top == None:
+            self.top = Node(data)
+        else:
+            newnode = Node(data)
+            newnode.next = self.top
+            self.top = newnode
+
+#2) pop
+    def pop(self):
+        if self.isempty():
+            return None
+        else:
+            poppednode = self.top
+            self.top = self.top.next
+            poppednode.next = None
+            return poppednode.data
+
+#3) peek
+    def peek(self):
+        if self.isempty():
+            return None
+        else:
+            return self.top.data
+
+#prints out the stack
+    def display(self):
+        iternode = self.top
+        if self.isempty():
+            print("Stack Underflow")
+        else:
+            while (iternode != None):
+                print(iternode.data, end=" ")
+                iternode = iternode.next
+                if(iternode != None):
+                    print("->", end= " ")
+            return
+
+MyStack = Stack()
+
+MyStack.push(11)
+MyStack.push(22)
+MyStack.push(33)
+MyStack.push(44)
+MyStack.display()
+print("\nTop element is: ",MyStack.peek())
+
+MyStack.pop()
+MyStack.pop()
+MyStack.display()
+print("\nTop element is: ",MyStack.peek())
+
+
+
+
+
+#22
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+
+class Queue:
+    def __init__(self):
+        self.front = None
+        self.rear = None
+    
+    def isEmpty(self):
+        if self.front == None:
+            return True
+        else:
+            return False
+
+#method to add an item to the queue
+    def EnQueue(self,item):
+        temp = Node(item)
+        if self.rear == None:
+            self.front = self.rear = temp
+            return
+        self.rear.next = temp
+        self.rear = temp
+
+#method to remove an item from queue
+    def DeQueue(self):
+        if self.isEmpty():
+            return
+        temp = self.front
+        self.front = temp.next
+        if(self.front == None):
+            self.rear = None
+
+    def display_queue(self):
+        temp = self.front
+        while(temp != None):
+            print("Queue Elements: ",temp.data)
+            temp = temp.next
+
+q= Queue()
+q.EnQueue(10)
+q.EnQueue(20)
+q.display_queue()
+
+q.DeQueue()
+q.DeQueue()
+
+q.EnQueue(30)
+q.EnQueue(40)
+q.EnQueue(50)
+
+q.DeQueue()
+q.DeQueue()
+q.DeQueue()
+
+print("Queue Front: "+str(q.front.data if q.front != None else -1))
+print("Queue Rear: " + str(q.rear.data if q.rear != None else -1))
