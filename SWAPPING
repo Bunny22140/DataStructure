@@ -1,0 +1,7 @@
+Num1 = int(input("Enter a number Num1: "))
+Num2 = int(input("Enter a number Num2: "))
+print("Before swaping Num1={} and Num2={}".format(Num1,Num2))
+temp = Num1
+Num1 = Num2
+Num2 = temp
+print("After swaping Num1={} and Num2={}".format(Num1,Num2))
